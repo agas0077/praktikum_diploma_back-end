@@ -3,7 +3,9 @@
     "airbnb-base"
   ],
   "rules": {
-    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
-    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
+    // "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+    // Говорят, что этим правилом пользоваться нельзя, хотя тогда
+    // в обработчике ошибок появляется next(), который никуда не ведет
   }
 }
