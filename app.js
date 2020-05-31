@@ -15,6 +15,7 @@ const { auth } = require('./middlewares/auth');
 const { createUser, login } = require('./controllers/credentials');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { errorHandler } = require('./middlewares/errorHandler');
+const rateLimiter = require('./middlewares/rateLimiter');
 
 // Запуск приложения
 const app = express();
@@ -22,6 +23,7 @@ mongoose.connect(DATABASE_URL, mongooseConfig);
 
 // Миддлверы для обработки входящих запросов
 app.use(helmet());
+app.use(rateLimiter);
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
