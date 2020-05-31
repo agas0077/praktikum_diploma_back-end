@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const uniqueValidator = require('mongoose-unique-validator');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 
-const Unauthorized = require('../errors/Unauthorized')
+const Unauthorized = require('../errors/Unauthorized');
 
 const userSchema = new mongoose.Schema({
   email: {

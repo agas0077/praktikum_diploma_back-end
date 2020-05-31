@@ -1,6 +1,6 @@
 const Article = require('../models/articles');
 const NotFoundError = require('../errors/NotFoundError');
-const Forbidden = require('../errors/Forbidden')
+const Forbidden = require('../errors/Forbidden');
 
 module.exports.getArticles = (req, res, next) => {
   const owner = req.user._id;
@@ -30,16 +30,16 @@ module.exports.createArticle = (req, res, next) => {
 
 module.exports.deleteArticle = (req, res, next) => {
   const { articleId } = req.params;
-  const owner = req.user._id
+  const owner = req.user._id;
 
   Article.findById({ _id: articleId })
+    .orFail(() => new NotFoundError('Не удалось найти карточку с таким id'))
     .then((article) => {
-      if (!article) throw new NotFoundError('Не удалось найти карточку с таким id');
-      if (article.owner !== owner) throw new Forbidden('Вы не можете удалить чужую карточку');
+      if (String(article.owner) !== owner) throw new Forbidden('Вы не можете удалить чужую карточку');
       Article.findByIdAndDelete({ _id: articleId })
-        .then(articleToDelete => {
+        .then((articleToDelete) => {
           res.status(200).send(articleToDelete);
-        })
+        });
     })
     .catch(next);
 };

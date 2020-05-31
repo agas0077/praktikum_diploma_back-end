@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+// Подключенные бибилиотеки
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -7,27 +8,26 @@ const helmet = require('helmet');
 const { Joi, celebrate, errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 
+// Подключенные модули
 const { mongooseConfig, PORT, DATABASE_URL } = require('./config');
 const router = require('./routes/index');
 const { auth } = require('./middlewares/auth');
 const { createUser, login } = require('./controllers/credentials');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { errorHandler } = require('./middlewares/errorHandler');
 
+// Запуск приложения
 const app = express();
-
-app.use(helmet());
-
 mongoose.connect(DATABASE_URL, mongooseConfig);
-mongoose.connection.on('connected', () => {
-  console.log('Connected');
-});
 
+// Миддлверы для обработки входящих запросов
+app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(requestLogger);
 
-app.use(requestLogger)
-
+// Все, что связано с уставновлением личность пользователя =)
 app.post(
   '/signup',
   celebrate({
@@ -53,15 +53,12 @@ app.post(
 
 app.use(auth);
 
+// Руты
 app.use('/', router);
 
+// Обработчики ошибок
 app.use(errors());
 app.use(errorLogger);
-
-app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = statusCode === 500 ? 'На сервере произошла ошибка' : err.message;
-  res.status(statusCode).send({ message });
-});
+app.use(errorHandler);
 
 app.listen(PORT);
