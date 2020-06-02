@@ -22,8 +22,8 @@ module.exports.createArticle = (req, res, next) => {
   Article.create({
     keyword, title, text, date, source, link, image, owner,
   })
-    .then((article) => {
-      res.status(200).send(article);
+    .then(() => {
+      res.status(200).send();
     })
     .catch(next);
 };
@@ -32,13 +32,13 @@ module.exports.deleteArticle = (req, res, next) => {
   const { articleId } = req.params;
   const owner = req.user._id;
 
-  Article.findById({ _id: articleId })
+  Article.findById({ _id: articleId }).select('+owner')
     .orFail(() => new NotFoundError('Не удалось найти карточку с таким id'))
     .then((article) => {
       if (String(article.owner) !== owner) throw new Forbidden('Вы не можете удалить чужую карточку');
       Article.findByIdAndDelete({ _id: articleId })
-        .then((articleToDelete) => {
-          res.status(200).send(articleToDelete);
+        .then(() => {
+          res.status(200).send();
         });
     })
     .catch(next);
