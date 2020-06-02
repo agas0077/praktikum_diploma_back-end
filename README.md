@@ -16,6 +16,7 @@ I hope it has now become a fully functional server that can be accessed from any
 
 ### Link 
 Public IP: 130.193.38.158
+
 The front-end of project can be opend from ~~[here](https://mesto4.fun "mesto4.fun")~~. __Currently unavliable__
 
 The back-end of the project can be accessed from [here](https://api.mesto4.fun "api.mesto4.fun"). __Hopefully avaliable__
