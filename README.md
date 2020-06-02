@@ -6,7 +6,7 @@ To user this server, use _npm run start_
 For developping use _npm run dev_
 
 ### Version 
-The current version is __1.0.0__
+The current version is __1.0.4__
 
 ### Techs
 In this project I used such technologies as Node.js, Express, EsLint, Body-Parser, MongoBD, Mongoose etc. For all techs used in the project check package.json .
