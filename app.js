@@ -22,6 +22,12 @@ mongoose.connect(DATABASE_URL, mongooseConfig);
 // Миддлверы для обработки входящих запросов
 app.use(helmet());
 app.use(rateLimiter);
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'mesto4.fun');
+  next();
+});
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
