@@ -24,7 +24,7 @@ app.use(helmet());
 app.use(rateLimiter);
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'mesto4.fun');
+  res.header('Access-Control-Allow-Origin', 'https://www.mesto4.fun', 'https://mesto4.fun', 'http://mesto4.fun', 'http://www.mesto4.fun');
   next();
 });
 
