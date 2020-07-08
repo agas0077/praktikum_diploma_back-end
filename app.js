@@ -24,6 +24,15 @@ mongoose.connect(DATABASE_URL, mongooseConfig);
 app.use(helmet());
 app.use(rateLimiter);
 
+const corsOptions = {
+  origin: ['https://mesto4.fun', 'http://localhost:8080'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  allowedHeaders: ['Content-Type'],
+};
+app.options('*', cors(corsOptions));
+
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
