@@ -23,7 +23,14 @@ mongoose.connect(DATABASE_URL, mongooseConfig);
 // Миддлверы для обработки входящих запросов
 app.use(helmet());
 app.use(rateLimiter);
-app.options('*', cors());
+
+const corsOptions = {
+  origin: 'https://mesto4.fun',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+app.options('*', cors(corsOptions));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
