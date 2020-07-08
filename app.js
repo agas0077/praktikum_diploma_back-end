@@ -31,7 +31,7 @@ const corsOptions = {
   optionsSuccessStatus: 204,
   allowedHeaders: ['Content-Type'],
 };
-app.options('*', cors(corsOptions));
+app.options(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(bodyParser.json());
