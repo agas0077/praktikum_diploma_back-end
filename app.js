@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 // Подключенные модули
 const { mongooseConfig, PORT, DATABASE_URL } = require('./config');
@@ -22,6 +23,7 @@ mongoose.connect(DATABASE_URL, mongooseConfig);
 // Миддлверы для обработки входящих запросов
 app.use(helmet());
 app.use(rateLimiter);
+app.options('*', cors());
 
 app.use(cookieParser());
 app.use(bodyParser.json());
