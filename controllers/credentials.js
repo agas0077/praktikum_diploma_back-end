@@ -55,6 +55,13 @@ module.exports.login = (req, res, next) => {
             httpOnly: true,
           },
         )
+        .cookie(
+          'isLogged',
+          1,
+          {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+          },
+        )
         .end();
     })
     .catch(next);
