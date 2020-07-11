@@ -53,12 +53,14 @@ module.exports.login = (req, res, next) => {
           {
             maxAge: 1000 * 60 * 60 * 24 * 7,
             httpOnly: true,
+            domain: 'mesto4.fun',
           },
         )
         .cookie(
           'isLogged',
           1,
           {
+            domain: 'mesto4.fun',
             maxAge: 1000 * 60 * 60 * 24 * 7,
           },
         )
