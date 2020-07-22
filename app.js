@@ -25,7 +25,7 @@ app.use(helmet());
 app.use(rateLimiter);
 
 const corsOptions = {
-  origin: ['https://mesto4.fun', 'http://localhost:8080'],
+  origin: ['https://mesto4.fun'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   preflightContinue: false,
   optionsSuccessStatus: 204,
