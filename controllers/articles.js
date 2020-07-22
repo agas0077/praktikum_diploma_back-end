@@ -22,8 +22,9 @@ module.exports.createArticle = (req, res, next) => {
   Article.create({
     keyword, title, text, date, source, link, image, owner,
   })
-    .then(() => {
-      res.status(200).send();
+    .then((result) => {
+      console.log(result);
+      res.status(200).send({ id: result._id });
     })
     .catch(next);
 };

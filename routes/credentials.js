@@ -1,7 +1,7 @@
 const credentials = require('express').Router();
 const { Joi, celebrate } = require('celebrate');
 
-const { createUser, login } = require('../controllers/credentials');
+const { signup, signin, signout } = require('../controllers/credentials');
 
 credentials.post(
   '/signup',
@@ -12,7 +12,7 @@ credentials.post(
       name: Joi.string().required().min(2).max(30),
     }),
   }),
-  createUser,
+  signup,
 );
 
 credentials.post(
@@ -23,7 +23,9 @@ credentials.post(
       password: Joi.string().required(),
     }),
   }),
-  login,
+  signin,
 );
+
+credentials.get('/signout', signout);
 
 module.exports = credentials;

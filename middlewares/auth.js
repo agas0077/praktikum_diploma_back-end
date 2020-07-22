@@ -6,7 +6,6 @@ const { KEY } = require('../config');
 module.exports.auth = (req, res, next) => {
   const token = req.cookies.jwt;
   let payload;
-
   if (!token) throw new Unauthorized('Нужно войти в систему');
 
   try {

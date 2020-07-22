@@ -33,12 +33,6 @@ const articleSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: true,
-    validate: {
-      validator(v) {
-        return validator.isURL(v);
-      },
-    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
