@@ -34,6 +34,8 @@ module.exports.signup = (req, res, next) => {
 module.exports.signin = (req, res, next) => {
   const { email, password } = req.body;
 
+  console.log(COOKIE_DOMAIN);
+
   User.findUserByCredentials(email, password)
     .then((user) => {
       if (!user) throw new Error();
