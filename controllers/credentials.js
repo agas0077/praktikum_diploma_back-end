@@ -79,8 +79,8 @@ module.exports.signin = (req, res, next) => {
 
 module.exports.signout = (req, res) => {
   res
-    .clearCookie('jwt')
-    .clearCookie('name')
-    .clearCookie('isLogged')
+    .clearCookie('jwt', { domain: COOKIE_DOMAIN })
+    .clearCookie('name', { domain: COOKIE_DOMAIN })
+    .clearCookie('isLogged', { domain: COOKIE_DOMAIN })
     .end();
 };
